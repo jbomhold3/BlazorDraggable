@@ -1,0 +1,18 @@
+<CascadingValue Value="@Id">
+    <div id="@Id" class="@Class" style="@Style">
+        @ChildContent
+    </div>
+</CascadingValue>
+@code {
+    [Parameter] private string Class { get; set; }
+    [Parameter] private string Style { get; set; }
+    [Parameter] private RenderFragment ChildContent { get; set; }
+    private Guid Id { get; set; } = new Guid();
+
+    protected override Task OnInitAsync()
+    {
+        Id = Guid.NewGuid();
+        return base.OnInitAsync();
+    }
+
+}

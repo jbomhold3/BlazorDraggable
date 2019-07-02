@@ -1,0 +1,15 @@
+<div style="@Style" class="@Class" @onmousedown="@MouseDown">
+    @ChildContent
+</div>
+
+@code {
+    [Parameter] private string Class { get; set; }
+    [Parameter] private string Style { get; set; }
+    [Parameter] private RenderFragment ChildContent { get; set; }
+    [CascadingParameter] private EventHandler WasClicked { get; set; }
+
+    private void MouseDown()
+    {
+        WasClicked.Invoke(this, new EventArgs());
+    }
+}

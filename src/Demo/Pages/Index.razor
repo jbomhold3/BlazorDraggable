@@ -1,0 +1,21 @@
+﻿@page "/"
+@using BlazorDragable.Models;
+@inject IJSRuntime JsRuntime;
+
+<div style="margin:50px;">
+    <DragableContainer style="width:500px;height:500px; border:1px solid green">
+        <DragableItem Class="card" UseHandle="true" BoundToContainer="true" Style="width:300px;" results="@HandleResults">
+            <DragableHandle  Class="card-header">Click here to Drag</DragableHandle>
+            <div class="card-body"> <p>Vivamus in magna at velit consectetur bibendum. Maecenas viverra diam in molestie accumsan. Etiam nec neque lacus. Integer molestie eget dui at luctus. Vivamus pulvinar enim nisi, in malesuada nulla ultrices fringilla. Praesent tincidunt facilisis sagittis. Phasellus scelerisque dolor sit amet nisl faucibus, at fermentum urna laoreet. </p></div>
+        </DragableItem>
+    </DragableContainer>
+</div>
+
+
+@code
+{
+    private void HandleResults(TopAndLeft position)
+    {
+        Console.WriteLine($"Top:{position.Top}, Left:{position.Left}");
+    }
+}
