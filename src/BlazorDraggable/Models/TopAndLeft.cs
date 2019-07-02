@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BlazorDragable.Models
+namespace BlazorDraggable.Models
 {
     public class TopAndLeft
     {

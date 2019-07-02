@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BlazorDragable.Demo
+namespace BlazorDraggable.Demo
 {
     public class Offsets
     {

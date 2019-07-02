@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29021.104
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorDraggable", "src\BlazorDraggable\BlazorDraggable.csproj", "{8D0AA75D-973E-4F93-8164-1F72FE360390}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorDraggable.Demo", "src\BlazorDraggable.Demo\BlazorDraggable.Demo.csproj", "{41EA643B-DF83-413F-A359-906EF75F4EFA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8D0AA75D-973E-4F93-8164-1F72FE360390}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D0AA75D-973E-4F93-8164-1F72FE360390}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D0AA75D-973E-4F93-8164-1F72FE360390}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D0AA75D-973E-4F93-8164-1F72FE360390}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41EA643B-DF83-413F-A359-906EF75F4EFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41EA643B-DF83-413F-A359-906EF75F4EFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41EA643B-DF83-413F-A359-906EF75F4EFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41EA643B-DF83-413F-A359-906EF75F4EFA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0BCDE9A7-1C1F-4A79-87D4-614CF892898C}
+	EndGlobalSection
+EndGlobal
