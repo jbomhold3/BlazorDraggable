@@ -6,7 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BlazorDraggable\BlazorDraggable.csproj" />
+    <PackageReference Include="BlazorDraggable" Version="1.0.0-preview6-1" />
+    <PackageReference Include="Microsoft.Azure.SignalR" Version="1.1.0-preview1-10426" />
+    <!--<ProjectReference Include="..\BlazorDraggable\BlazorDraggable.csproj" />-->
   </ItemGroup>
 
 </Project>
