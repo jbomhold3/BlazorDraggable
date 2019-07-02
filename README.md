@@ -1,54 +1,47 @@
 # BlazorDraggable
 
-Bootstrap 4 Components for Blazor Framework
+Draggable Compoents for Blazor.Early Versions might not work Client side
 
 ## Install
 
-[![NuGet Pre Release](https://img.shields.io/nuget/vpre/BlazorStrap.svg)](https://www.nuget.org/packages/BlazorStrap/)
+[![NuGet Pre Release](https://img.shields.io/nuget/vpre/BlazorDraggable.svg)](https://www.nuget.org/packages/BlazorDraggable/)
 
-## Docs
-https://chanan.github.io/BlazorStrap/
-
-## Blazorous
-
-If you want to manage your styles in code and use dynamic styles you can check out my other project: [Blazorous](https://chanan.github.io/Blazorous/).
-In the future I will show examples of mixing and matching BlazorStrap and Blazorous.
+## Usage Server Side
+- _host.cshtml
+``` html 
+<script src="_content/BlazorDraggable/BlazorDragable.js"></script>
+```
+- Basic Usage
+``` html
+<DragableItem results="@HandleResults>Content</DragableItem>
+```    
+``` c#
+@code
+{
+    private void HandleResults(TopAndLeft position)
+    {
+        Console.WriteLine($"Top:{position.Top}, Left:{position.Left}");
+    }
+}
+```
+- Advanced Use
+``` html
+<DragableContainer style="width:500px;height:500px; border:1px solid green">
+  <DragableItem Class="card" UseHandle="true" BoundToContainer="true" Style="width:300px;" results="@HandleResults">
+    <DragableHandle  Class="card-header">Click here to Drag</DragableHandle>
+    <div class="card-body"> <p>Vivamus in magna at velit consectetur bibendum. Maecenas viverra diam in molestie accumsan. Etiam nec neque lacus. Integer molestie eget dui at luctus. Vivamus pulvinar enim nisi, in malesuada nulla ultrices fringilla. Praesent tincidunt facilisis sagittis. Phasellus scelerisque dolor sit amet nisl faucibus, at fermentum urna laoreet. </p></div>
+  </DragableItem>
+</DragableContainer>
+```    
+``` c#
+@code
+{
+    private void HandleResults(TopAndLeft position)
+    {
+        Console.WriteLine($"Top:{position.Top}, Left:{position.Left}");
+    }
+}
+```
 
 ## Change Log
-https://github.com/chanan/BlazorStrap/releases
-
-## Done:
-* Alerts
-* Badges
-* Breadcrumbs
-* Buttons (excluding Checkboxes and Radio buttons)
-* ButtonGroups
-* Cards
-* Carousals
-* Collapse
-* Dropdowns
-* Images
-* Jumbotrons
-* Figures
-* Forms - mostly done (Binding still pending)
-* Layout (Container, Row, Col)
-* Listgroups
-* Navs
-* Navbars
-* Media
-* Modals
-* Pagination
-* Popover
-* Progress
-* Tables
-* Tabs
-* Tooltip
-
-## Not Done
-
-* Button of type: Checkboxes and Radio buttons
-* Modal - Close by clicking the Esc key
-* Modal - Will currently "clobber" body classes
-* Events on all components that need it (Modal for example)
-* Allow for arbitrary attributes on all components
-* Animations
+https://github.com/jbomhold3/BlazorDraggable/releases
