@@ -24,7 +24,7 @@ Draggable Compoents for Blazor.Early Versions might not work Client side
     }
 }
 ```
-- Advanced Use
+- Advanced Usage
 ``` html
 <DragableContainer style="width:500px;height:500px; border:1px solid green">
   <DragableItem Class="card" UseHandle="true" BoundToContainer="true" Style="width:300px;" results="@HandleResults">
