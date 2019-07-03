@@ -1,0 +1,8 @@
+[
+  {
+    "outputFileName": "wwwroot/BlazorDragable.min.js",
+    "inputFiles": [
+      "wwwroot/BlazorDragable.js"
+    ]
+  }
+]
