@@ -1,4 +1,4 @@
-<div style="@Style" class="@Class" @onmousedown="@MouseDown">
+<div id="@(Id.ToString())-Handle"style="@Style" class="@Class" >
     @ChildContent
 </div>
 
@@ -6,10 +6,6 @@
     [Parameter] private string Class { get; set; }
     [Parameter] private string Style { get; set; }
     [Parameter] private RenderFragment ChildContent { get; set; }
-    [CascadingParameter] private EventHandler WasClicked { get; set; }
+    [CascadingParameter] private Guid Id { get; set; }
 
-    private void MouseDown()
-    {
-        WasClicked.Invoke(this, new EventArgs());
-    }
 }
