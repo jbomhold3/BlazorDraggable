@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RazorLangVersion>3.0</RazorLangVersion>
     <PackageId>BlazorDraggable</PackageId>
-    <Version>1.0.0-preview6-2</Version>
+    <Version>1.0.0-preview8-1</Version>
     <Authors>John J Bomhold</Authors>
     <Title>Blazor Dragable</Title>
     <Description>Draggable Compoents for Blazor.
@@ -26,7 +26,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components" Version="3.0.0-preview6.19307.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="3.0.0-preview8.19405.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.0.0-preview8.19405.7" />
   </ItemGroup>
   
   

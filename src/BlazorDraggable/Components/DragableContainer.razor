@@ -4,15 +4,15 @@
     </div>
 </CascadingValue>
 @code {
-    [Parameter] private string Class { get; set; }
-    [Parameter] private string Style { get; set; }
-    [Parameter] private RenderFragment ChildContent { get; set; }
+    [Parameter] public string Class { get; set; }
+    [Parameter] public string Style { get; set; }
+    [Parameter] public RenderFragment ChildContent { get; set; }
     private Guid Id { get; set; } = new Guid();
 
-    protected override Task OnInitAsync()
+    protected override Task OnInitializedAsync()
     {
         Id = Guid.NewGuid();
-        return base.OnInitAsync();
+        return base.OnInitializedAsync();
     }
 
 }

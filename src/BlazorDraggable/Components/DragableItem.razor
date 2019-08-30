@@ -8,106 +8,105 @@
 
 @code
 {
-    [Parameter] private string Class { get; set; }
-    [Parameter] private string Style { get; set; }
-    [Parameter] private bool BoundToContainer { get; set; }
-    [Parameter] private bool UseHandle { get; set; }
-    [Parameter] private RenderFragment ChildContent { get; set; }
-    [Parameter] private Action<TopAndLeft> Results { get; set; }
-    [CascadingParameter] private Guid ParentId { get; set; } = new Guid(); // Might use more later
+[Parameter] public string Class { get; set; }
+[Parameter] public string Style { get; set; }
+[Parameter] public bool BoundToContainer { get; set; }
+[Parameter] public bool UseHandle { get; set; }
+[Parameter] public RenderFragment ChildContent { get; set; }
+[Parameter] public Action<TopAndLeft> Results { get; set; }
+[CascadingParameter] private Guid ParentId { get; set; } = new Guid(); // Might use more later
 
 
-    private Guid Id { get; set; } = new Guid();
-    private Size MySize { get; set; } = new Size();
-    private Size ParentSize { get; set; } = new Size();
-    private TopAndLeft MyPosition { get; set; } = new TopAndLeft();
-    private TopAndLeft MouseOffsets = new TopAndLeft();
-    private bool CanMove = false;
-    private bool FirstRun = true;
-    protected async override Task OnInitAsync()
+private Guid Id { get; set; } = new Guid();
+private Size MySize { get; set; } = new Size();
+private Size ParentSize { get; set; } = new Size();
+private TopAndLeft MyPosition { get; set; } = new TopAndLeft();
+private TopAndLeft MouseOffsets = new TopAndLeft();
+//private bool CanMove = false;
+private bool FirstRun = true;
+protected async override Task OnInitializedAsync()
+{
+    Id = Guid.NewGuid();
+    JsHandler.ResultsChanged += OnResultsChange;
+}
+
+protected override async Task OnAfterRenderAsync()
+{
+    if (!ComponentContext.IsConnected || !FirstRun)
     {
-        Id = Guid.NewGuid();
-        JsHandler.ResultsChanged += OnResultsChange;
+        return;
     }
 
-    protected override async Task OnAfterRenderAsync()
-    {
-        if (!ComponentContext.IsConnected || !FirstRun)
-        {
-            return;
-        }
-        //   var data = System.Text.Json.Serialization.JsonSerializer.Parse<TopAndLeft>(await ReturnArrayAsync());
+    await JsRuntime.InvokeAsync<string>("BlazorDraggable.AddEventListener",  Id, BoundToContainer, UseHandle );
+    FirstRun = false;
+}
 
-        await JsRuntime.InvokeAsync<string>("BlazorDraggable.AddEventListener",  Id, BoundToContainer, UseHandle );
-        FirstRun = false;
-    }
+private void OnResultsChange(object sender, string e)
+{
+    Results.Invoke(System.Text.Json.JsonSerializer.Deserialize<TopAndLeft>(e));
+}
+//Saved For later use
+private async Task MouseDown(UIMouseEventArgs e)
+{
+    //if (BoundToContainer)
+    //{
+    //    var parentSize = await JsRuntime.InvokeAsync<string>("BlazorDragable.getSize", ParentId.ToString());
+    //    ParentSize = System.Text.Json.Serialization.JsonSerializer.Parse<Size>(parentSize);
+    //}
+    //var size = await JsRuntime.InvokeAsync<string>("BlazorDragable.getSize", Id.ToString());
+    //MySize = System.Text.Json.Serialization.JsonSerializer.Parse<Size>(size);
+    //var mouse = await JsRuntime.InvokeAsync<string>("BlazorDragable.getBoundingClientRect", Id.ToString());
+    //var mouseOffset = System.Text.Json.Serialization.JsonSerializer.Parse<TopAndLeft>(mouse);
 
-    private void OnResultsChange(object sender, string e)
-    {
-         Results.Invoke(System.Text.Json.Serialization.JsonSerializer.Parse<TopAndLeft>(e));
-    }
-    //Saved For later use
-    private async Task MouseDown(UIMouseEventArgs e)
-    {
-        //if (BoundToContainer)
-        //{
-        //    var parentSize = await JsRuntime.InvokeAsync<string>("BlazorDragable.getSize", ParentId.ToString());
-        //    ParentSize = System.Text.Json.Serialization.JsonSerializer.Parse<Size>(parentSize);
-        //}
-        //var size = await JsRuntime.InvokeAsync<string>("BlazorDragable.getSize", Id.ToString());
-        //MySize = System.Text.Json.Serialization.JsonSerializer.Parse<Size>(size);
-        //var mouse = await JsRuntime.InvokeAsync<string>("BlazorDragable.getBoundingClientRect", Id.ToString());
-        //var mouseOffset = System.Text.Json.Serialization.JsonSerializer.Parse<TopAndLeft>(mouse);
+    //MouseOffsets.Top = (mouseOffset.Top - e.ClientY) * -1;
+    //MouseOffsets.Left = (mouseOffset.Left - e.ClientX) * -1;
+    //if (!UseHandle)
+    //{
+    //    CanMove = true;
+    //}
+}
+private async Task MouseMove(UIMouseEventArgs e)
+{
+    //if (e.Buttons == 1)
+    //{
+    //    if (!CanMove)
+    //    {
+    //        return;
+    //    }
+    //    e.ClientY -= MouseOffsets.Top;
+    //    e.ClientX -= MouseOffsets.Left;
 
-        //MouseOffsets.Top = (mouseOffset.Top - e.ClientY) * -1;
-        //MouseOffsets.Left = (mouseOffset.Left - e.ClientX) * -1;
-        //if (!UseHandle)
-        //{
-        //    CanMove = true;
-        //}
-    }
-    private async Task MouseMove(UIMouseEventArgs e)
-    {
-        //if (e.Buttons == 1)
-        //{
-        //    if (!CanMove)
-        //    {
-        //        return;
-        //    }
-        //    e.ClientY -= MouseOffsets.Top;
-        //    e.ClientX -= MouseOffsets.Left;
+    //    if (BoundToContainer)
+    //    {
+    //        var x = await JsRuntime.InvokeAsync<string>("BlazorDragable.getOffsets", ParentId.ToString());
+    //        var clientOffset = System.Text.Json.Serialization.JsonSerializer.Parse<TopAndLeft>(x);
+    //        e.ClientX -= clientOffset.Left;
+    //        e.ClientY -= clientOffset.Top;
+    //        if ((e.ClientX) < 0)
+    //        {
+    //            e.ClientX = 0;
+    //        }
+    //        if ((e.ClientY) < 0)
+    //        {
+    //            e.ClientY = 0;
+    //        }
 
-        //    if (BoundToContainer)
-        //    {
-        //        var x = await JsRuntime.InvokeAsync<string>("BlazorDragable.getOffsets", ParentId.ToString());
-        //        var clientOffset = System.Text.Json.Serialization.JsonSerializer.Parse<TopAndLeft>(x);
-        //        e.ClientX -= clientOffset.Left;
-        //        e.ClientY -= clientOffset.Top;
-        //        if ((e.ClientX) < 0)
-        //        {
-        //            e.ClientX = 0;
-        //        }
-        //        if ((e.ClientY) < 0)
-        //        {
-        //            e.ClientY = 0;
-        //        }
+    //        if ((e.ClientX + MySize.Width) > ParentSize.Width)
+    //        {
+    //            e.ClientX = ParentSize.Width - MySize.Width;
+    //        }
+    //        if ((e.ClientY + MySize.Height) > ParentSize.Height)
+    //        {
+    //            e.ClientY = ParentSize.Height - MySize.Height;
+    //        }
+    //    }
 
-        //        if ((e.ClientX + MySize.Width) > ParentSize.Width)
-        //        {
-        //            e.ClientX = ParentSize.Width - MySize.Width;
-        //        }
-        //        if ((e.ClientY + MySize.Height) > ParentSize.Height)
-        //        {
-        //            e.ClientY = ParentSize.Height - MySize.Height;
-        //        }
-        //    }
-
-        //    MyPosition.Top = e.ClientY;
-        //    MyPosition.Left = e.ClientX;
-        //}
-        //else
-        //{
-        //    CanMove = false;
-        //}
-    }
+    //    MyPosition.Top = e.ClientY;
+    //    MyPosition.Left = e.ClientX;
+    //}
+    //else
+    //{
+    //    CanMove = false;
+    //}
+}
 }
