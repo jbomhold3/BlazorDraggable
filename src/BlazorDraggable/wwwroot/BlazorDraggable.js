@@ -39,11 +39,23 @@
             }
         });
         el.addEventListener('mouseup', e => {
+            x = e.currentTarget;
+            x.style.WebkitUserSelect = "auto"; // Chrome, Safari, Opera
+            x.style.MozUserSelect = "auto"; // Firefox
+            x.style.msUserSelect = "auto"; // IE 10+
+            x.style.userSelect = "auto"; // Standard syntax
+
             var myid = e.currentTarget.id;
             var rect = e.currentTarget.getBoundingClientRect();
             DotNet.invokeMethodAsync('BlazorDraggable', 'ReturnArrayAsync', JSON.stringify({ Top: Math.round(rect.top), Left: Math.round(rect.left) }));
         });
         el.addEventListener('mousemove', e => {
+            x = e.currentTarget;
+            x.style.WebkitUserSelect = "none"; // Chrome, Safari, Opera
+            x.style.MozUserSelect = "none"; // Firefox
+            x.style.msUserSelect = "none"; // IE 10+
+            x.style.userSelect = "none"; // Standard syntax
+
             var myid = e.currentTarget.id;
             
             if (e.buttons == 1) {
@@ -56,7 +68,7 @@
                 x -= clientOffset.Left;
                 y -= clientOffset.Top;
                 if (window.BlazorDraggable.DragableItems[myid].BoundToContainer) {
-            
+
                     if ((x) < 0) {
                         x = 0;
                     }
@@ -72,14 +84,16 @@
                     }
                 }
 
-             
+
                 var transform = "translate3d(" + x + "px, " + y + "px, " + 0 + "px)";
-                e.currentTarget.style.transform = transform; 
+                e.currentTarget.style.transform = transform;
+            
             }
             else {
                 window.BlazorDraggable.DragableItems[myid].CanMove = false;
                 
             }
+     
         });
     }
 

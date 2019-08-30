@@ -4,5 +4,11 @@
     "inputFiles": [
       "wwwroot/BlazorDragable.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/BlazorDraggable.min.js",
+    "inputFiles": [
+      "wwwroot/BlazorDraggable.js"
+    ]
   }
 ]
